@@ -1,15 +1,43 @@
-# Read the contents of console_output.txt
-with open("console_output.txt", "r") as output_file:
-    formatted_output = output_file.read()
+import re
 
-# Update the README.md file with the formatted output
-readme_file = "README.md"
-with open(readme_file, "r") as readme:
-    readme_content = readme.read()
+def update_log_in_md(log_file_path, html_file_path):
 
-# Replace the placeholder with the formatted output
-updated_readme_content = readme_content.replace("<output of the formatted status.log file goes here>", formatted_output)
+    # Read the contents of the log file
+    with open(log_file_path, "r") as log_file:
+        log_contents = log_file.read()
 
-# Write the updated content back to the README.md file
-with open(readme_file, "w") as readme:
-    readme.write(updated_readme_content)
+    # Split the log contents into lines
+    lines = log_contents.strip().split("\n")
+
+    # Add ">>>" before each line
+    formatted_output_with_arrows = "\n".join([f">>> {line}" for line in lines])
+
+    # Process the log_contents to create the formatted output
+    formatted_output = f"```\n{formatted_output_with_arrows}\n```"
+
+    # Storing the README.md content within a new variable
+    with open(html_file_path, "r") as readme:
+        readme_content = readme.read()
+
+    # Using re.sub() to replace content between markers ``` and ```
+    pattern = r"```.*?```"
+    updated_readme_content = re.sub(pattern, formatted_output, readme_content, flags=re.DOTALL)
+
+    # Write the updated content back to the README.md file
+    with open(html_file_path, "w") as readme:
+        readme.write(updated_readme_content)
+
+def main():
+    # Path to the log file
+    log_file_path = 'status.log'
+    
+    # Path to the MD file
+    md_file_path = 'README.md'
+
+    # Update the HTML file with the log content
+    update_log_in_md(log_file_path, md_file_path)
+
+# This part only runs if this script is run as main
+if __name__ == "__main__":
+    main()
+    

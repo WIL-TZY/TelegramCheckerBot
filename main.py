@@ -6,6 +6,7 @@ import os
 import datetime
 import logging
 import logging.handlers
+from update_readme import update_log_in_md
 
 # Set up the logger
 logger = logging.getLogger(__name__)
@@ -93,20 +94,15 @@ def routine():
 
         print(price)
 
-        # Update the README.md file with the formatted output
-        readme_file = "README.md"
-        with open(readme_file, "r") as readme:
-            readme_content = readme.read()
+        # Update the README.md file with the log content
+        log_file_path = 'status.log'
+        md_file_path = 'README.md'
+        update_log_in_md(log_file_path, md_file_path)
 
-        # Replace the placeholder with the formatted output
-        updated_readme_content = readme_content.replace("<output of the formatted status.log file goes here>", formatted_output)
-
-        # Write the updated content back to the README.md file
-        with open(readme_file, "w") as readme:
-            readme.write(updated_readme_content)
-            
         # Program runs every 5 hours
         sleep(60 * 60 * interval)
 
-print("Routine ran")   
-routine()
+print("Routine ran, now sleeping")
+
+if __name__ == "__main__":
+    routine()

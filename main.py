@@ -26,14 +26,14 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 # Function for checking env vars
-def get_env_variable(key, default_value):
+def get_env_variable(key, error_message):
     try:
         return os.environ[key]
     except KeyError:
         # Print the token value only when it falls into the except block
         if __name__ == "__main__":
-            logger.info(f"Token value: {default_value}")
-        return default_value
+            logger.warning(f"Token value: {error_message}")
+        return error_message
 
 # Env vars availability
 TELEBOT_TOKEN = get_env_variable("TELEBOT_TOKEN", "Bot token not available!")
@@ -73,31 +73,34 @@ def routine():
         # Argument must be class_, because class is a reserved word in Python
         price_element = html.find(class_ = "finalPrice")
 
-        # Returns the text inside the element
-        price_content = price_element.string
+        if price_element is not None:
+            # Returns the text inside the element
+            price_content = price_element.string
+            
+            print(price_content)
 
-        print(price_content)
+            # Returns a list with the words separated
+            real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
 
-        # Returns a list with the words separated
-        real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
+            # Transforming the two values into a single string
+            price = float('.'.join([real, cents])) # XXXX & XX becomes XXXX.XX
 
-        # Transforming the two values into a single string
-        price = float('.'.join([real, cents])) # XXXX & XX becomes XXXX.XX
+            # Converting to float (to compare with other numbers)
+            #price = float(price)
 
-        # Converting to float (to compare with other numbers)
-        #price = float(price)
+            if last_price and price < last_price :
+                sendMessage(price)
 
-        if last_price and price < last_price :
-            sendMessage(price)
+            last_price = price
 
-        last_price = price
+            print(price)
 
-        print(price)
-
-        # Update the README.md file with the log content
-        log_file_path = 'status.log'
-        md_file_path = 'README.md'
-        update_log_in_md(log_file_path, md_file_path)
+            # Update the README.md file with the log content
+            log_file_path = 'status.log'
+            md_file_path = 'README.md'
+            update_log_in_md(log_file_path, md_file_path)
+        else:
+            logger.warning("Price element not found.")
 
         # Program runs every 5 hours
         sleep(60 * 60 * interval)

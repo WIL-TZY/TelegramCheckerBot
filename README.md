@@ -16,6 +16,7 @@ It's scheduled to start running at 12pm and re-checking the website every 5 hour
 ```
 >>> 2023-07-25 01:01:07 - __main__ - INFO - The script ran
 >>> 2023-07-25 04:01:00 - __main__ - INFO - The script ran
+>>> 2023-07-26 01:40:42 - __main__ - INFO - The script ran
 ```
 
 You can check the full log in `status.log`.

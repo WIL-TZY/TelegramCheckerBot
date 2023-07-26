@@ -79,6 +79,7 @@ def routine():
     global last_price
     loop_counter = 1
     logger.info(f"Running the routine. Loop count: {loop_counter}")
+
     # Calculate the time until the next XX:59
     # (The next duration variable needs to be declared outside the loop)
     # sleep_duration is the time in seconds until XX:59
@@ -105,6 +106,7 @@ def routine():
         # Argument must be class_, because class is a reserved word in Python
         price_element = html.find(class_ = "finalPrice")
 
+        # Note: This block of code seems to be skipped in the GitHub Action... Gotta find out why
         if price_element is not None:
             # Returns the text inside the element
             price_content = price_element.string
@@ -114,11 +116,8 @@ def routine():
             # Returns a list with the words separated
             real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
 
-            # Transforming the two values into a single string
+            # Transforming the two values into a single string and converting to float (to compare with other numbers)
             price = float('.'.join([real, cents])) # XXXX & XX becomes XXXX.XX
-
-            # Converting to float (to compare with other numbers)
-            #price = float(price)
 
             if last_price and price < last_price :
                 sendMessage(price)

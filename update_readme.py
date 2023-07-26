@@ -9,8 +9,11 @@ def update_log_in_md(log_file_path, html_file_path):
     # Split the log contents into lines
     lines = log_contents.strip().split("\n")
 
+    # Get the last 6 log lines
+    last_six_lines = lines[-6:] # Using slicing syntax: [start:end] / "-6" indicates the sixth-to-last element of the lines list
+
     # Add ">>>" before each line
-    formatted_output_with_arrows = "\n".join([f">>> {line}" for line in lines])
+    formatted_output_with_arrows = "\n".join([f">>> {line}" for line in last_six_lines])
 
     # Process the log_contents to create the formatted output
     formatted_output = f"```\n{formatted_output_with_arrows}\n```"

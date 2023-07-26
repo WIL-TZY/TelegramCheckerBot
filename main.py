@@ -3,7 +3,7 @@ import bs4
 import re 
 from time import sleep
 import os
-import datetime
+from datetime import datetime, timedelta
 import logging
 import logging.handlers
 from update_readme import update_log_in_md
@@ -30,7 +30,6 @@ def get_env_variable(key, error_message):
     try:
         return os.environ[key]
     except KeyError:
-        # Print the token value only when it falls into the except block
         if __name__ == "__main__":
             logger.warning(f"Token value: {error_message}")
         return error_message
@@ -53,6 +52,20 @@ headers = {
     "user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
 }
 
+# Calculate when next hour's minute is equal to :59
+def get_next_occurrence():
+    now = datetime.now()
+    MIN = 59
+    next_occurrence = now.replace(minute=MIN, second=0, microsecond=0)
+
+    if now.minute >= MIN:
+        # If the current minute is 59 or greater, schedule the next occurrence for the next hour
+        next_occurrence += timedelta(hours=1)
+
+    time_difference = next_occurrence - now
+
+    return time_difference.total_seconds(), next_occurrence
+
 def sendMessage(price) :
     global last_price
     urlReq = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -64,8 +77,27 @@ def sendMessage(price) :
 
 def routine():
     global last_price
-    
+    loop_counter = 1
+    logger.info(f"Running the routine. Loop count: {loop_counter}")
+    # Calculate the time until the next XX:59
+    # (The next duration variable needs to be declared outside the loop)
+    # sleep_duration is the time in seconds until XX:59
+    sleep_duration, next_occurrence = get_next_occurrence()
+
     while True:
+        now = datetime.now()
+
+        # Check if it's 13:59, if yes, break the loop
+        if now.hour == 13 and now.minute == 59:
+            logger.info("Stopping the script.")
+            break
+
+        # Log the time and counter when the routine runs
+        if sleep_duration <= 0:
+            # Increment timer every run
+            loop_counter += 1
+            logger.info(f"Running the routine. Loop count: {loop_counter}")
+
         req = requests.get(url, headers = headers)
 
         html = bs4.BeautifulSoup(req.content, 'html.parser')
@@ -102,10 +134,13 @@ def routine():
         else:
             logger.warning("Price element not found.")
 
-        # Program runs every 5 hours
-        sleep(60 * 60 * interval)
+        # Program sleeps until the next XX:59
+        sleep(sleep_duration)
 
-print("Routine ran, now sleeping")
+        # Update next_occurrence for the next loop iteration
+        sleep_duration, next_occurrence = get_next_occurrence()
+    
+    print(f"Routine stopped at {next_occurrence.strftime('%H:%M')}.")
 
 if __name__ == "__main__":
     routine()

@@ -14,9 +14,8 @@ It's scheduled to start running at 12pm and re-checking the website every 5 hour
 </div>
 
 ```
->>> 2023-07-25 01:01:07 - __main__ - INFO - The script ran
->>> 2023-07-25 04:01:00 - __main__ - INFO - The script ran
->>> 2023-07-26 01:40:42 - __main__ - INFO - The script ran
+>>> 2023-07-26 17:35:12 - __main__ - INFO - The script ran
+>>> 2023-07-26 17:35:12 - __main__ - INFO - Running the routine. Loop count: 1
 ```
 
 You can check the full log in `status.log`.

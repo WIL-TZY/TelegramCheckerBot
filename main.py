@@ -41,6 +41,8 @@ MY_CHAT_ID = get_env_variable("MY_CHAT_ID", "Telegram Chat ID token not availabl
 # Verify script
 logger.info('The script ran')
 
+# VARIABLES
+MAX_ALLOWED_DURATION_SECONDS = 4 * 3600 + 59 * 60 # (4 hours and 59 minutes)
 last_price = None
 interval = 5
 token = os.environ.get('TELEBOT_TOKEN')
@@ -85,11 +87,14 @@ def routine():
     # sleep_duration is the time in seconds until XX:59
     sleep_duration, next_occurrence = get_next_occurrence()
 
+    # Get the start time of the routine
+    start_time = datetime.now()
+
     while True:
         now = datetime.now()
 
-        # Check if it's 13:59, if yes, break the loop
-        if now.hour == 13 and now.minute == 59:
+        # Check if it's 13:59 or if the maximum allowed duration is exceeded, if yes, break the loop
+        if now.hour == 13 and now.minute == 59 or (now - start_time).total_seconds() >= MAX_ALLOWED_DURATION_SECONDS:
             logger.info("Stopping the script.")
             break
 

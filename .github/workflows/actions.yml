@@ -2,11 +2,12 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '0 14 * * *' # Everyday at 14:00 (2pm)
+    - cron: 0 */5 * * * # Everyday at 00:00, 05:00, 10:00, 15:00, and 20:00
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    #continue-on-error: true
     steps:
 
       - name: checkout repo content
@@ -26,7 +27,7 @@ jobs:
         env:
           SECRET1: ${{ secrets.TELEBOT_TOKEN }}
           SECRET2: ${{ secrets.MY_CHAT_ID }}
-        run: python main.py
+        run: python main.py #--max-runtime 17940 # (4:59 hours)
           
       - name: commit files
         run: |

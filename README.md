@@ -1,10 +1,9 @@
 # Price Checker
 This is a python project that runs as a cron job with GitHub Actions on a daily basis. 
 
-The purpose of this automation is to regularly check for price changes of certain products on the web.
+The purpose of this automation is to regularly check for price changes of certain electronic products on the web.
 
-It's scheduled to start running at 12pm and re-checking the website every 5 hours.
-
+It's scheduled to run every 5 hours and runs a main loop to check the website constantly.
 <!-- Log Console -->
 
 <div align="center" >
@@ -14,8 +13,8 @@ It's scheduled to start running at 12pm and re-checking the website every 5 hour
 </div>
 
 ```
->>> 2023-07-26 17:35:12 - __main__ - INFO - The script ran
->>> 2023-07-26 17:35:12 - __main__ - INFO - Running the routine. Loop count: 1
+>>> 2023-07-28 02:57:56 - __main__ - INFO - The script ran
+>>> 2023-07-28 02:57:56 - __main__ - INFO - Running the routine. Loop count: 1
 ```
 
 You can check the full log in `status.log`.

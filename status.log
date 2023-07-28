@@ -1,2 +1,13 @@
 2023-07-28 02:57:56 - __main__ - INFO - The script ran
 2023-07-28 02:57:56 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-28 15:14:40 - __main__ - WARNING - Token value: Bot token not available!
+2023-07-28 15:14:40 - __main__ - WARNING - Token value: Telegram Chat ID token not available!
+2023-07-28 15:14:40 - __main__ - INFO - The script ran
+2023-07-28 15:14:40 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-28 15:14:40 - __main__ - WARNING - Price element not found.
+2023-07-28 15:59:00 - __main__ - WARNING - Price element not found.
+2023-07-28 16:59:00 - __main__ - WARNING - Price element not found.
+2023-07-28 17:59:00 - __main__ - WARNING - Price element not found.
+2023-07-28 18:59:00 - __main__ - WARNING - Price element not found.
+2023-07-28 19:59:00 - __main__ - WARNING - Price element not found.
+2023-07-28 20:59:00 - __main__ - INFO - Stopping the script.

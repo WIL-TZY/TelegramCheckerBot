@@ -58,7 +58,8 @@ last_price = None
 interval = 5
 token = TELEBOT_TOKEN
 chatID = MY_CHAT_ID
-url = "https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
+url = "https://www.pichau.com.br/gabinete-gamer-pichau-hx350-mid-tower-lateral-de-vidro-com-4-fans-preto-pg-hx35-bl01"
+# "https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
 
 # Simulating the browser to gain access to the domain
 headers = {
@@ -125,7 +126,7 @@ def routine():
         html = bs4.BeautifulSoup(req.content, 'html.parser')
 
         # Argument must be class_, because class is a reserved word in Python
-        price_element = html.find(class_ = "finalPrice")
+        price_element = html.find(class_ = "jss267")
 
         # Note: This block of code seems to be skipped in the GitHub Action... Gotta find out why
         if price_element is not None:

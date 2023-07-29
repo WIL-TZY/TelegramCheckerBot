@@ -33,3 +33,4 @@ Check the `requirements.txt` file for pip third party packages to install.
 <strong>Note:</strong> This project uses secret environment variables that only collaborators can see and use, but you can fork or clone the repo to make your own. 
 
 ## Disclaimer
+This program is for personal use only, which falls under fair use. This is, in any way, used for massive data share, large scale web scraping, nor commercial purposes. It runs in a fair rate limit in order to respect the website's policy.

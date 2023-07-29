@@ -31,28 +31,33 @@ logger.info('The script ran')
 # Function for checking env vars
 def get_env_variable(key, error_message):
     try:
-        # Check environment
-        if "GITHUB_REPOSITORY" in os.environ:
-            # Changes the repository name from e.g. "owner/repo" to "owner_repo" to create a valid GH Actions prefix
-            repo_prefix = os.environ["GITHUB_REPOSITORY"].replace("/", "_") 
-            return os.environ[f"{repo_prefix}_{key}"]
-        else:
-            return os.environ[key]
+        return os.environ[key]
     except KeyError:
         if __name__ == "__main__":
             logger.warning(f"Token value: {error_message}")
         return error_message
 
 # Env vars availability
-TELEBOT_TOKEN = get_env_variable("SECRET1", "Bot token not available!")
-MY_CHAT_ID = get_env_variable("SECRET2", "Telegram Chat ID token not available!")
+KEY_TELEBOT = ""
+KEY_CHAT = ""
+
+# Check environment
+if "GITHUB_REPOSITORY" in os.environ:
+    KEY_TELEBOT = "SECRET1"
+    KEY_CHAT = "SECRET2"
+else:
+    KEY_TELEBOT = "TELEBOT_TOKEN"
+    KEY_CHAT = "MY_CHAT_ID"
+
+TELEBOT_TOKEN = get_env_variable(f"{KEY_TELEBOT}", "Bot token not available!")
+MY_CHAT_ID = get_env_variable(f"{KEY_CHAT}", "Telegram Chat ID token not available!")
 
 # VARIABLES
 MAX_ALLOWED_DURATION_SECONDS = 4 * 3600 + 59 * 60 # (4 hours and 59 minutes)
 last_price = None
 interval = 5
-token = os.environ.get('TELEBOT_TOKEN')
-chatID = os.environ.get('MY_CHAT_ID')
+token = TELEBOT_TOKEN
+chatID = MY_CHAT_ID
 url = "https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
 
 # Simulating the browser to gain access to the domain

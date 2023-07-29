@@ -115,8 +115,8 @@ def routine():
         req = requests.get(url, headers = headers)
 
         # Debugging
-        logger.debug("Requisition status code:", req.status_code) 
-        logger.debug("Requisition content:", req.content)
+        logger.debug("Requisition status code: %s", req.status_code)
+        logger.debug("Requisition content: %s", req.content)
 
         html = bs4.BeautifulSoup(req.content, 'html.parser')
 

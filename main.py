@@ -58,7 +58,8 @@ last_price = None
 interval = 5
 token = TELEBOT_TOKEN
 chatID = MY_CHAT_ID
-url = "https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
+url = "https://www.pichau.com.br/api/checkout?query=query%20CartInstallmentByProductDiscount($productId:%20Int!,%20$total:%20Float!)%20{%20CartInstallmentByProductDiscount(productId:%20$productId,%20total:%20$total)%20{%20discount_percentage%20discount_value%20subtotal%20label%20installments%20installment_value%20__typename%20}%20}&operationName=CartInstallmentByProductDiscount&variables={\"cartSubtotal\":211.65,\"cartTotal\":211.65,\"total\":211.65,\"productId\":34504}"
+#"https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
 
 # Simulating the browser to gain access to the domain
 headers = {

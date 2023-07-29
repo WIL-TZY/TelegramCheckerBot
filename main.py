@@ -79,8 +79,7 @@ def sendMessage(price) :
 
 def routine():
     global last_price
-    loop_counter = 1
-    logger.info(f"Running the routine. Loop count: {loop_counter}")
+    loop_counter = 0
 
     # Calculate the time until the next XX:59
     # (The next duration variable needs to be declared outside the loop)
@@ -99,10 +98,8 @@ def routine():
             break
 
         # Log the time and counter when the routine runs
-        if sleep_duration <= 0:
-            # Increment timer every run
-            loop_counter += 1
-            logger.info(f"Running the routine. Loop count: {loop_counter}")
+        loop_counter += 1
+        logger.info(f"Running the routine. Loop count: {loop_counter}")
 
         req = requests.get(url, headers = headers)
 
@@ -131,12 +128,14 @@ def routine():
 
             print(price)
 
-            # Update the README.md file with the log content
-            log_file_path = 'status.log'
-            md_file_path = 'README.md'
-            update_log_in_md(log_file_path, md_file_path)
         else:
-            logger.warning("Price element not found.")
+            logger.warning("Price element not found. Stopping the script.")
+            break
+
+        # Update the README.md file with the log content
+        log_file_path = 'status.log'
+        md_file_path = 'README.md'
+        update_log_in_md(log_file_path, md_file_path)
 
         # Program sleeps until the next XX:59
         sleep(sleep_duration)

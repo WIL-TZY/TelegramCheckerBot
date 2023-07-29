@@ -62,10 +62,23 @@ url = "https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual
 
 # Simulating the browser to gain access to the domain
 headers = {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "pt-BR,pt;q=0.9,ja-JP;q=0.8,ja;q=0.7,en-US;q=0.6,en;q=0.5",
+    "Host": "httpbin.org",
+    "Referer": "https://www.codementor.io/@scrapingdog/10-tips-to-avoid-getting-blocked-while-scraping-websites-16papipe62",
+    "Sec-Ch-Ua": "\"Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"115\", \"Chromium\";v=\"115\"",
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": "\"Windows\"",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "cross-site",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
     # Chrome user agent
-    "user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
-    # Mozilla user agent
-    # "user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0'
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    "X-Amzn-Trace-Id": "Root=1-64c4a8af-37cbecc916c1bc9b0772fc85",
+    "Referer": "https://www.google.com/"
 }
 
 # Calculate when next hour's minute is equal to :59
@@ -119,7 +132,7 @@ def routine():
 
         # Debugging
         logger.debug("Requisition status code: %s", req.status_code)
-        logger.debug("Requisition content: %s", req.content)
+        # logger.debug("Requisition content: %s", req.content)
 
         html = bs4.BeautifulSoup(req.content, 'html.parser')
 

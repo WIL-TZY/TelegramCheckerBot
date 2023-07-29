@@ -13,8 +13,8 @@ It's scheduled to run every 5 hours and runs a main loop to check the website co
 </div>
 
 ```
->>> 2023-07-28 02:57:56 - __main__ - INFO - The script ran
->>> 2023-07-28 02:57:56 - __main__ - INFO - Running the routine. Loop count: 1
+>>> 2023-07-29 02:44:23 - __main__ - INFO - Running the routine. Loop count: 1
+>>> 2023-07-29 02:44:23 - __main__ - DEBUG - Requisition status code: 200
 ```
 
 You can check the full log in `status.log`.

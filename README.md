@@ -22,7 +22,7 @@ If any price decrease is detected, the program triggers a Telegram bot that resp
 >>> 2023-07-29 03:27:14 - __main__ - DEBUG - Requisition status code: 200
 ```
 
-You can check the full log in `status.log`.
+You can check the full log in [`status.log`](./status.log).
 
 ## More Info
 
@@ -33,4 +33,4 @@ Check the `requirements.txt` file for pip third party packages to install.
 <strong>Note:</strong> This project uses secret environment variables that only collaborators can see and use, but you can fork or clone the repo to make your own. 
 
 ## Disclaimer
-This program is for personal use only, which falls under fair use. This is, in any way, used for massive data share, large scale web scraping, nor commercial purposes. It runs in a fair rate limit in order to respect the website's policy.
+This program is for personal use only, which falls under fair use. This isn't, in any way, used for massive data share, large scale web scraping, nor commercial purposes. It runs in a fair rate limit in order to respect the website's policy.

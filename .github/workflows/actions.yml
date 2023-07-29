@@ -6,6 +6,12 @@ on:
     - cron: 0 */5 * * * # Everyday at 00:00, 05:00, 10:00, 15:00, and 20:00
 
 jobs:
+  check_user_agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP request
+        run: python -c "import requests; print(requests.get('https://httpbin.org/user-agent').json())"
+
   build:
     runs-on: ubuntu-latest
     #continue-on-error: true

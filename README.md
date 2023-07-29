@@ -1,10 +1,11 @@
 # Price Checker
-This is a python project that runs as a cron job with GitHub Actions on a daily basis. 
+This is a web scraper made with Python that runs as cron job with GitHub Actions on a daily basis.
 
-The purpose of this automation is to regularly check for price changes of certain electronic products on the web.
+The purpose of this automation is to regularly check for price changes of certain electronic products on selected websites. I'm using the ScrapingDog API to manage the HTTP Requests.
 
-It's scheduled to run every 5 hours and runs a main loop to check the website constantly.
-<!-- Log Console -->
+The workflow is scheduled to start running at 00:00 and re-runs every 5 hours. The program's main loop checks the website every hour.
+
+If any price decrease is detected, the program triggers a Telegram bot that responds by sending a message to a private chat.
 
 <div align="center" >
 
@@ -30,3 +31,5 @@ The `actions.yml` file can be found inside `.github/workflows/actions.yml`, it w
 Check the `requirements.txt` file for pip third party packages to install.
 
 <strong>Note:</strong> This project uses secret environment variables that only collaborators can see and use, but you can fork or clone the repo to make your own. 
+
+## Disclaimer

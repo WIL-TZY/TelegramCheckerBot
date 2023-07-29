@@ -79,3 +79,13 @@
 2023-07-29 03:29:37 - __main__ - INFO - Running the routine. Loop count: 1
 2023-07-29 03:29:42 - __main__ - DEBUG - Requisition status code: 200
 2023-07-29 03:29:42 - __main__ - WARNING - Price element not found. Stopping the script.
+2023-07-29 10:12:57 - __main__ - INFO - The script ran
+2023-07-29 10:12:57 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-29 10:13:06 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 10:59:08 - __main__ - INFO - Running the routine. Loop count: 2
+2023-07-29 10:59:12 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 11:59:04 - __main__ - INFO - Running the routine. Loop count: 3
+2023-07-29 11:59:13 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 12:59:09 - __main__ - INFO - Running the routine. Loop count: 4
+2023-07-29 12:59:15 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 13:59:06 - __main__ - INFO - Stopping the script.

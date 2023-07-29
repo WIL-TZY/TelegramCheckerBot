@@ -114,6 +114,10 @@ def routine():
 
         req = requests.get(url, headers = headers)
 
+        # Debugging
+        logger.debug("Requisition status code:", req.status_code) 
+        logger.debug("Requisition content:", req.content)
+
         html = bs4.BeautifulSoup(req.content, 'html.parser')
 
         # Argument must be class_, because class is a reserved word in Python

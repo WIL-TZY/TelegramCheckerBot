@@ -58,29 +58,7 @@ last_price = None
 interval = 5
 token = TELEBOT_TOKEN
 chatID = MY_CHAT_ID
-url = "https://www.pichau.com.br/api/checkout?query=query%20CartInstallmentByProductDiscount($productId:%20Int!,%20$total:%20Float!)%20{%20CartInstallmentByProductDiscount(productId:%20$productId,%20total:%20$total)%20{%20discount_percentage%20discount_value%20subtotal%20label%20installments%20installment_value%20__typename%20}%20}&operationName=CartInstallmentByProductDiscount&variables={\"cartSubtotal\":211.65,\"cartTotal\":211.65,\"total\":211.65,\"productId\":34504}"
-#"https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2"
-
-# Simulating the browser to gain access to the domain
-headers = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "pt-BR,pt;q=0.9,ja-JP;q=0.8,ja;q=0.7,en-US;q=0.6,en;q=0.5",
-    "Host": "httpbin.org",
-    "Referer": "https://www.codementor.io/@scrapingdog/10-tips-to-avoid-getting-blocked-while-scraping-websites-16papipe62",
-    "Sec-Ch-Ua": "\"Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"115\", \"Chromium\";v=\"115\"",
-    "Sec-Ch-Ua-Mobile": "?0",
-    "Sec-Ch-Ua-Platform": "\"Windows\"",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "cross-site",
-    "Sec-Fetch-User": "?1",
-    "Upgrade-Insecure-Requests": "1",
-    # Chrome user agent
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-    "X-Amzn-Trace-Id": "Root=1-64c4a8af-37cbecc916c1bc9b0772fc85",
-    "Referer": "https://www.google.com/"
-}
+url = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url=https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2&dynamic=false"
 
 # Calculate when next hour's minute is equal to :59
 def get_next_occurrence():
@@ -129,7 +107,8 @@ def routine():
         loop_counter += 1
         logger.info(f"Running the routine. Loop count: {loop_counter}")
 
-        req = requests.get(url, headers = headers)
+        # No need to add the headers parameter with a headers dict since the Scrappingdog API is being used
+        req = requests.get(url)
 
         # Debugging
         logger.debug("Requisition status code: %s", req.status_code)

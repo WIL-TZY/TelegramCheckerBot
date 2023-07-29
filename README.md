@@ -13,8 +13,12 @@ It's scheduled to run every 5 hours and runs a main loop to check the website co
 </div>
 
 ```
->>> 2023-07-29 02:44:23 - __main__ - INFO - Running the routine. Loop count: 1
->>> 2023-07-29 02:44:23 - __main__ - DEBUG - Requisition status code: 200
+>>> 2023-07-29 03:25:45 - __main__ - INFO - Running the routine. Loop count: 1
+>>> 2023-07-29 03:25:46 - __main__ - DEBUG - Requisition status code: 403
+>>> 2023-07-29 03:25:46 - __main__ - WARNING - Price element not found. Stopping the script.
+>>> 2023-07-29 03:27:07 - __main__ - INFO - The script ran
+>>> 2023-07-29 03:27:07 - __main__ - INFO - Running the routine. Loop count: 1
+>>> 2023-07-29 03:27:14 - __main__ - DEBUG - Requisition status code: 200
 ```
 
 You can check the full log in `status.log`.

@@ -64,3 +64,18 @@
 2023-07-29 05:55:30 - __main__ - INFO - Running the routine. Loop count: 1
 2023-07-29 05:55:30 - __main__ - DEBUG - Requisition status code: 403
 2023-07-29 05:55:30 - __main__ - WARNING - Price element not found. Stopping the script.
+2023-07-29 03:24:45 - __main__ - INFO - The script ran
+2023-07-29 03:24:45 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-29 03:24:45 - __main__ - DEBUG - Requisition status code: 403
+2023-07-29 03:24:45 - __main__ - WARNING - Price element not found. Stopping the script.
+2023-07-29 03:25:45 - __main__ - INFO - The script ran
+2023-07-29 03:25:45 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-29 03:25:46 - __main__ - DEBUG - Requisition status code: 403
+2023-07-29 03:25:46 - __main__ - WARNING - Price element not found. Stopping the script.
+2023-07-29 03:27:07 - __main__ - INFO - The script ran
+2023-07-29 03:27:07 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-29 03:27:14 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 03:29:37 - __main__ - INFO - The script ran
+2023-07-29 03:29:37 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-29 03:29:42 - __main__ - DEBUG - Requisition status code: 200
+2023-07-29 03:29:42 - __main__ - WARNING - Price element not found. Stopping the script.

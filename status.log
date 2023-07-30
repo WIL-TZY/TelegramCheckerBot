@@ -127,3 +127,17 @@
 2023-07-30 12:59:07 - __main__ - INFO - Running the routine. Loop count: 4
 2023-07-30 12:59:10 - __main__ - DEBUG - Requisition status code: 200
 2023-07-30 13:59:03 - __main__ - INFO - Stopping the script.
+2023-07-30 15:12:24 - __main__ - INFO - The script ran
+2023-07-30 15:12:24 - __main__ - INFO - Running the routine. Loop count: 1
+2023-07-30 15:12:31 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 15:59:06 - __main__ - INFO - Running the routine. Loop count: 2
+2023-07-30 15:59:13 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 16:59:07 - __main__ - INFO - Running the routine. Loop count: 3
+2023-07-30 16:59:18 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 17:59:10 - __main__ - INFO - Running the routine. Loop count: 4
+2023-07-30 17:59:18 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 18:59:07 - __main__ - INFO - Running the routine. Loop count: 5
+2023-07-30 18:59:13 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 19:59:05 - __main__ - INFO - Running the routine. Loop count: 6
+2023-07-30 19:59:09 - __main__ - DEBUG - Requisition status code: 200
+2023-07-30 20:59:03 - __main__ - INFO - Stopping the script.

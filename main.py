@@ -49,8 +49,8 @@ else:
     KEY_TELEBOT = "TELEBOT_TOKEN"
     KEY_CHAT = "MY_CHAT_ID"
 
-TELEBOT_TOKEN = get_env_variable(f"{KEY_TELEBOT}", "Bot token not available!")
-MY_CHAT_ID = get_env_variable(f"{KEY_CHAT}", "Telegram Chat ID token not available!")
+TELEBOT_TOKEN = get_env_variable(KEY_TELEBOT, "Bot token not available!")
+MY_CHAT_ID = get_env_variable(KEY_CHAT, "Telegram Chat ID token not available!")
 
 # VARIABLES
 MAX_ALLOWED_DURATION_SECONDS = 4 * 3600 + 59 * 60 # (4 hours and 59 minutes)
@@ -58,7 +58,74 @@ last_price = None
 interval = 5
 token = TELEBOT_TOKEN
 chatID = MY_CHAT_ID
-url = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url=https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2&dynamic=false"
+#url = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url=https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2&dynamic=false"
+scrapdog_accessor = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url="
+urls_kabum = [
+    f"{scrapdog_accessor}https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2", # GPU
+    f"{scrapdog_accessor}https://www.kabum.com.br/produto/112995/processador-intel-core-i7-10700f-2-9ghz-4-8ghz-max-turbo-cache-16mb-lga-1200-bx8070110700f", # CPU
+    f"{scrapdog_accessor}https://www.kabum.com.br/produto/172413/memoria-kingston-fury-beast-rgb-32gb-2x16gb-3200mhz-ddr4-cl16-preto-kf432c16bb1ak2-32", # RAM
+    f"{scrapdog_accessor}https://www.kabum.com.br/produto/338410/ssd-480-gb-wd-green-m-2-leitura-545mb-s-wds480g3g0b", # SSD WD Green
+    f"{scrapdog_accessor}https://www.kabum.com.br/produto/295687/ssd-wd-green-1tb-sata-leitura-545mb-s-gravacao-430mb-s-wds100t2g0a", # SSD Kingston
+
+]
+
+urls_pichau = [
+    f"{scrapdog_accessor}https://www.pichau.com.br/gabinete-gamer-pichau-hx350-mid-tower-lateral-de-vidro-com-4-fans-preto-pg-hx35-bl01?gclid=Cj0KCQiA5NSdBhDfARIsALzs2EDDWINb1rakiLO4XJgVT29p9BY7r1_BtSEXCkzROzsdqM-6gikEiLcaApDcEALw_wcB",
+]
+
+# Class to handle each site
+class SiteChecker:
+    def __init__(self, name, url, headers, find_element_method, element_identifier):
+        self.name = name
+        self.url = url
+        self.headers = headers
+        self.find_element_method = find_element_method
+        self.element_identifier = element_identifier
+        self.last_price = None
+
+    def check_price_and_send_message(self):
+        req = requests.get(self.url, headers=self.headers)
+
+        # Debugging
+        logger.debug("Requisition status code: %s", req.status_code)
+        # logger.debug("Requisition content: %s", req.content)
+
+        html = bs4.BeautifulSoup(req.content, 'html.parser')
+
+        price_element = html.find(self.find_element_method, class_= self.element_identifier)
+
+        if price_element is not None:
+            price_content = price_element.string
+            real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
+            price = float('.'.join([real, cents]))
+
+            if self.last_price and price < self.last_price:
+                sendMessage(price, self.url)
+
+            self.last_price = price
+
+            return price
+
+        else:
+            logger.warning(f"Price element not found for site: {self.name}")
+            return self.last_price
+
+# Create instances of SiteChecker for each site
+site_kabum = SiteChecker(
+    name = "Kabum",
+    url = urls_kabum, 
+    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'},
+    find_element_method = "class_",
+    element_identifier = "finalPrice"
+)
+
+site_pichau = SiteChecker(
+    name = "Pichau",
+    url = urls_pichau,
+    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'},
+    find_element_method = "class_",
+    element_identifier = "jss267"
+)
 
 # Calculate when next hour's minute is equal to :59
 def get_next_occurrence():
@@ -74,7 +141,7 @@ def get_next_occurrence():
 
     return time_difference.total_seconds(), next_occurrence
 
-def sendMessage(price) :
+def sendMessage(price, url, site) :
     global last_price
     urlReq = f"https://api.telegram.org/bot{token}/sendMessage"
     data = {
@@ -87,6 +154,9 @@ def routine():
     global last_price
     loop_counter = 0
 
+    # List of SiteChecker objects
+    sites = [site_kabum, site_pichau]
+    
     # Calculate the time until the next XX:59
     # (The next duration variable needs to be declared outside the loop)
     # sleep_duration is the time in seconds until XX:59
@@ -108,18 +178,18 @@ def routine():
         logger.info(f"Running the routine. Loop count: {loop_counter}")
 
         # No need to add the headers parameter with a headers dict since the Scrappingdog API is being used
-        req = requests.get(url)
+        #req = requests.get(url)
+        
+        # Check prices for all sites
+        for site in sites:
+            site.check_price_and_send_message()
 
-        # Debugging
-        logger.debug("Requisition status code: %s", req.status_code)
-        # logger.debug("Requisition content: %s", req.content)
-
-        html = bs4.BeautifulSoup(req.content, 'html.parser')
+        #html = bs4.BeautifulSoup(req.content, 'html.parser')
 
         # Argument must be class_, because class is a reserved word in Python
-        price_element = html.find(class_ = "finalPrice")
+        #price_element = html.find(class_ = "finalPrice")
 
-        # Note: This block of code seems to be skipped in the GitHub Action... Gotta find out why
+        '''
         if price_element is not None:
             # Returns the text inside the element
             price_content = price_element.string
@@ -142,6 +212,7 @@ def routine():
         else:
             logger.warning("Price element not found. Stopping the script.")
             break
+        '''
 
         # Update the README.md file with the log content
         log_file_path = 'status.log'

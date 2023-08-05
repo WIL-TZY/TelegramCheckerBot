@@ -74,55 +74,56 @@ urls_pichau = [
 
 # Class to handle each site
 class SiteChecker:
-    def __init__(self, name, url, find_element_method, element_identifier):
+    def __init__(self, name, urls, find_element_method, element_identifier):
         self.name = name
-        self.url = url
+        self.urls = urls
         self.find_element_method = find_element_method
         self.element_identifier = element_identifier
         self.last_price = None
 
     def check_price_and_send_message(self):
-        # No need to add the headers parameter with a headers dict since the Scrappingdog API is taking care of it
-        req = requests.get(self.url)
+        for url in self.urls:
+            # No need to add the headers parameter with a headers dict since the Scrappingdog API is taking care of it
+            req = requests.get(self.url)
 
-        # Debugging
-        logger.debug("Requisition status code: %s", req.status_code)
-        # logger.debug("Requisition content: %s", req.content)
+            # Debugging
+            logger.debug("Requisition status code: %s", req.status_code)
+            # logger.debug("Requisition content: %s", req.content)
 
-        html = bs4.BeautifulSoup(req.content, 'html.parser')
+            html = bs4.BeautifulSoup(req.content, 'html.parser')
 
-        # Argument must be class_, because class is a reserved word in Python
-        price_element = html.find(self.find_element_method, class_= self.element_identifier)
+            # Argument must be class_, because class is a reserved word in Python
+            price_element = html.find(self.find_element_method, class_= self.element_identifier)
 
-        if price_element is not None:
-            # Returns the text inside the element
-            price_content = price_element.string
-            # Returns a list with the words separated
-            real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
-            price = float('.'.join([real, cents]))
+            if price_element is not None:
+                # Returns the text inside the element
+                price_content = price_element.string
+                # Returns a list with the words separated
+                real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
+                price = float('.'.join([real, cents]))
 
-            if self.last_price and price < self.last_price:
-                sendMessage(price, self.url)
+                if self.last_price and price < self.last_price:
+                    sendMessage(price, self.url)
 
-            self.last_price = price
+                self.last_price = price
 
-            return price
+                return price
 
-        else:
-            logger.warning(f"Price element not found for site: {self.name}")
-            return self.last_price
+            else:
+                logger.warning(f"Price element not found for site: {self.name}")
+                return self.last_price
 
 # Create instances of SiteChecker for each site
 site_kabum = SiteChecker(
     name = "Kabum",
-    url = urls_kabum, 
+    urls = urls_kabum, 
     find_element_method = "class_",
     element_identifier = "finalPrice"
 )
 
 site_pichau = SiteChecker(
     name = "Pichau",
-    url = urls_pichau,
+    urls = urls_pichau,
     find_element_method = "class_",
     element_identifier = "jss267"
 )

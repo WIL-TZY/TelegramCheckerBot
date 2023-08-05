@@ -14,12 +14,12 @@ If any price decrease is detected, the program triggers a Telegram bot that resp
 </div>
 
 ```
->>> 2023-08-04 17:59:03 - __main__ - INFO - Running the routine. Loop count: 4
->>> 2023-08-04 17:59:06 - __main__ - DEBUG - Requisition status code: 200
->>> 2023-08-04 18:59:03 - __main__ - INFO - Running the routine. Loop count: 5
->>> 2023-08-04 18:59:07 - __main__ - DEBUG - Requisition status code: 200
->>> 2023-08-04 19:59:04 - __main__ - INFO - Running the routine. Loop count: 6
->>> 2023-08-04 19:59:18 - __main__ - DEBUG - Requisition status code: 200
+>>> 2023-08-05 03:59:05 - __main__ - INFO - Running the routine. Loop count: 4
+>>> 2023-08-05 03:59:08 - __main__ - DEBUG - Requisition status code: 200
+>>> 2023-08-05 04:59:03 - __main__ - INFO - Running the routine. Loop count: 5
+>>> 2023-08-05 04:59:05 - __main__ - DEBUG - Requisition status code: 200
+>>> 2023-08-05 05:59:02 - __main__ - INFO - Running the routine. Loop count: 6
+>>> 2023-08-05 05:59:06 - __main__ - DEBUG - Requisition status code: 200
 ```
 
 You can check the full log in [`status.log`](./status.log).

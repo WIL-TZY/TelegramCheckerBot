@@ -75,16 +75,15 @@ urls_pichau = [
 
 # Class to handle each site
 class SiteChecker:
-    def __init__(self, name, url, headers, find_element_method, element_identifier):
+    def __init__(self, name, url, find_element_method, element_identifier):
         self.name = name
         self.url = url
-        self.headers = headers
         self.find_element_method = find_element_method
         self.element_identifier = element_identifier
         self.last_price = None
 
     def check_price_and_send_message(self):
-        req = requests.get(self.url, headers=self.headers)
+        req = requests.get(self.url)
 
         # Debugging
         logger.debug("Requisition status code: %s", req.status_code)
@@ -114,7 +113,6 @@ class SiteChecker:
 site_kabum = SiteChecker(
     name = "Kabum",
     url = urls_kabum, 
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'},
     find_element_method = "class_",
     element_identifier = "finalPrice"
 )
@@ -122,7 +120,6 @@ site_kabum = SiteChecker(
 site_pichau = SiteChecker(
     name = "Pichau",
     url = urls_pichau,
-    headers = {"user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'},
     find_element_method = "class_",
     element_identifier = "jss267"
 )

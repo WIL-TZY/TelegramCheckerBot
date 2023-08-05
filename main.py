@@ -84,7 +84,7 @@ class SiteChecker:
     def check_price_and_send_message(self):
         for url in self.urls:
             # No need to add the headers parameter with a headers dict since the Scrappingdog API is taking care of it
-            req = requests.get(self.url)
+            req = requests.get(url)
 
             # Debugging
             logger.debug("Requisition status code: %s", req.status_code)

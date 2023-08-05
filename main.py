@@ -58,7 +58,6 @@ last_price = None
 interval = 5
 token = TELEBOT_TOKEN
 chatID = MY_CHAT_ID
-#url = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url=https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2&dynamic=false"
 scrapdog_accessor = "https://api.scrapingdog.com/scrape?api_key=64c4aee1b3192c4b3fd9bb67&url="
 urls_kabum = [
     f"{scrapdog_accessor}https://www.kabum.com.br/produto/164854/placa-de-video-rtx-3060-asus-dual-o12g-v2-nvidia-geforce-12gb-gddr6-lhr-dlss-ray-tracing-dual-rtx3060-o12g-v2", # GPU
@@ -83,6 +82,7 @@ class SiteChecker:
         self.last_price = None
 
     def check_price_and_send_message(self):
+        # No need to add the headers parameter with a headers dict since the Scrappingdog API is taking care of it
         req = requests.get(self.url)
 
         # Debugging
@@ -91,10 +91,13 @@ class SiteChecker:
 
         html = bs4.BeautifulSoup(req.content, 'html.parser')
 
+        # Argument must be class_, because class is a reserved word in Python
         price_element = html.find(self.find_element_method, class_= self.element_identifier)
 
         if price_element is not None:
+            # Returns the text inside the element
             price_content = price_element.string
+            # Returns a list with the words separated
             real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
             price = float('.'.join([real, cents]))
 
@@ -173,43 +176,10 @@ def routine():
         # Log the time and counter when the routine runs
         loop_counter += 1
         logger.info(f"Running the routine. Loop count: {loop_counter}")
-
-        # No need to add the headers parameter with a headers dict since the Scrappingdog API is being used
-        #req = requests.get(url)
         
         # Check prices for all sites
         for site in sites:
             site.check_price_and_send_message()
-
-        #html = bs4.BeautifulSoup(req.content, 'html.parser')
-
-        # Argument must be class_, because class is a reserved word in Python
-        #price_element = html.find(class_ = "finalPrice")
-
-        '''
-        if price_element is not None:
-            # Returns the text inside the element
-            price_content = price_element.string
-            
-            print(price_content)
-
-            # Returns a list with the words separated
-            real, cents = map(lambda value: re.sub(r'[^0-9]', '', value), price_content.split(','))
-
-            # Transforming the two values into a single string and converting to float (to compare with other numbers)
-            price = float('.'.join([real, cents])) # XXXX & XX becomes XXXX.XX
-
-            if last_price and price < last_price :
-                sendMessage(price)
-
-            last_price = price
-
-            print(price)
-
-        else:
-            logger.warning("Price element not found. Stopping the script.")
-            break
-        '''
 
         # Update the README.md file with the log content
         log_file_path = 'status.log'

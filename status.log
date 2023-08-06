@@ -435,3 +435,35 @@
 2023-08-06 12:59:40 - __main__ - DEBUG - Requisition status code: 200
 2023-08-06 12:59:40 - __main__ - WARNING - Price element not found for site: Pichau
 2023-08-06 13:59:14 - __main__ - INFO - Stopping the script.
+2023-08-06 15:04:25 - __main__ - INFO - The script ran
+2023-08-06 15:04:25 - __main__ - INFO - Running the routine. Loop count: 1
+2023-08-06 15:04:33 - __main__ - DEBUG - Requisition status code: 403
+2023-08-06 15:04:33 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 15:04:40 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 15:04:40 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 15:59:14 - __main__ - INFO - Running the routine. Loop count: 2
+2023-08-06 15:59:28 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 15:59:28 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 15:59:35 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 15:59:35 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 16:59:20 - __main__ - INFO - Running the routine. Loop count: 3
+2023-08-06 16:59:28 - __main__ - DEBUG - Requisition status code: 403
+2023-08-06 16:59:28 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 16:59:35 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 16:59:35 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 17:59:14 - __main__ - INFO - Running the routine. Loop count: 4
+2023-08-06 17:59:26 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 17:59:26 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 17:59:32 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 17:59:32 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 18:59:18 - __main__ - INFO - Running the routine. Loop count: 5
+2023-08-06 18:59:26 - __main__ - DEBUG - Requisition status code: 403
+2023-08-06 18:59:26 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 18:59:33 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 18:59:33 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 19:59:15 - __main__ - INFO - Running the routine. Loop count: 6
+2023-08-06 19:59:33 - __main__ - DEBUG - Requisition status code: 403
+2023-08-06 19:59:33 - __main__ - WARNING - Price element not found for site: Kabum
+2023-08-06 19:59:40 - __main__ - DEBUG - Requisition status code: 200
+2023-08-06 19:59:40 - __main__ - WARNING - Price element not found for site: Pichau
+2023-08-06 20:59:24 - __main__ - INFO - Stopping the script.

@@ -14,12 +14,12 @@ If any price decrease is detected, the program triggers a Telegram bot that resp
 </div>
 
 ```
->>> 2023-08-09 03:59:33 - __main__ - WARNING - Price element not found for site: Pichau
->>> 2023-08-09 04:59:16 - __main__ - INFO - Running the routine. Loop count: 6
->>> 2023-08-09 04:59:55 - __main__ - DEBUG - Requisition status code: 200
->>> 2023-08-09 04:59:55 - __main__ - WARNING - Price element not found for site: Kabum
->>> 2023-08-09 05:00:05 - __main__ - DEBUG - Requisition status code: 200
->>> 2023-08-09 05:00:05 - __main__ - WARNING - Price element not found for site: Pichau
+>>> 2023-08-09 11:59:33 - __main__ - WARNING - Price element not found for site: Pichau
+>>> 2023-08-09 12:59:14 - __main__ - INFO - Running the routine. Loop count: 4
+>>> 2023-08-09 12:59:23 - __main__ - DEBUG - Requisition status code: 403
+>>> 2023-08-09 12:59:23 - __main__ - WARNING - Price element not found for site: Kabum
+>>> 2023-08-09 12:59:29 - __main__ - DEBUG - Requisition status code: 200
+>>> 2023-08-09 12:59:30 - __main__ - WARNING - Price element not found for site: Pichau
 ```
 
 You can check the full log in [`status.log`](./status.log).
